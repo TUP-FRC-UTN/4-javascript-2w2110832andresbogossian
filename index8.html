@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+    integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <title>Clase 4 - Javascript</title>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Registro de persona</h1>
+    <form>
+      Nombre: <br>
+      <input type="text" name="nombre" id="txtNombre"><br>
+      Apellido: <br>
+      <input type="text" name="Apellido" id="txtApellido"><br>
+      <br>
+
+      Sexo: <br>
+      <input type="radio" name="Genero" value="masculino">Masculino <br>
+      <input type="radio" name="Genero" value="femenino">Femenino <br>
+      <input type="radio" name="Genero" value="otro">Otro
+
+      <br>
+      <br>
+      Edad: <br>
+      <input id="edad" class="form-control" type="text" name="edad">
+      <br>
+      <br>
+      Deporte: <br>
+      <select name="deporte" id="deporte">
+        <option value="">Seleccione...</option>
+        <option value="tenis">Tenis</option>
+        <option value="futbol">Futbol</option>
+        <option value="rugby">Rugby</option>
+        <option value="padel">Padel</option>
+      </select>
+
+      <br>
+
+      <br>
+      Descripcion de usuario:<br>
+      <textarea name="descripcion" rows="10" cols="60" id="txtDescripcion" ></textarea>
+      <br>
+
+      <br>
+      <button type="button" onclick="validarForm();">Validar</button>
+      <br>
+      <br>
+      <br>
+      <button type="button" onclick="GuardarDatos()">Enviar formulario</button>
+    </div>
+
+  <!-- Optional JavaScript; choose one of the two! -->
+
+  <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+    crossorigin="anonymous"></script>
+
+  <!-- Option 2: Separate Popper and Bootstrap JS -->
+  <!--
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+    -->
+  <script>
+      function validarForm(){
+        var txtNombre = document.getElementById('txtNombre');
+        var txtApellido = document.getElementById('txtApellido');
+        var radioButtonGenero = document.getElementsByName('Genero');
+        var txtEdad = document.getElementById('edad');
+        var selectDeporte = document.getElementById('deporte');
+        var txtDescripcion = document.getElementById('txtDescripcion');
+
+        
+        if (txtNombre.value == '') {
+            swal ('El nombre es requerido!')
+            return false;
+        }
+        if ( txtApellido.value === ''){
+            swal ('El Apellido es requerido!')
+            return false;
+        }
+
+        
+        var AlgunoSeleccionado = false;
+        for (let i = 0; i < radioButtonGenero.length; i++) {
+            if ( radioButtonGenero[i].checked){
+                var AlgunoSeleccionado = true;
+                break;
+            }
+        }
+        if  (AlgunoSeleccionado == false){
+            swal('seleccione una opcion');
+            return false ;
+        }
+        
+        if(isNaN(txtEdad.value)){
+          swal('Ingrese un número por favor.')
+        return false;
+      }
+
+
+        if(selectDeporte[selectDeporte.selectedIndex].value === ''){
+            swal('seleccione un deporte');
+            return false;
+        }
+        
+        if ( txtDescripcion.value === ''){
+            swal('se requiere que escriba en este campo!')
+            return false;
+        } else if (txtDescripcion.value.length > 100){
+            swal('no puedo escribir mas de 100 caracteres');
+            return false;
+        }
+        return true ;
+    }
+    function GuardarDatos(){
+        if (validarForm() == true){
+            swal('Guardando datos');
+        }
+        else{
+            swal ('Error de validacion');
+        }
+      }
+    
+
+  </script>
+</body>
+
+</html>
